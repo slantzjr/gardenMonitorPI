@@ -24,9 +24,15 @@ class gardenMonitorSession:
 		logoutRequest = requests.put(self.coreURL + "logout", data=logoutData, cookies=self.request.cookies)
 		print logoutRequest.status_code
 
-	def sendMeasurement(self, temperature, hasWater):
-		measurementData = {'temperature': "%.2f" % temperature, 'hasWater': repr(hasWater).lower(), '_csrf': self.csrf}
-		createMeasurementRequest = requests.put(self.coreURL + 'measurement', data=measurementData, cookies=self.request.cookies)
+	def sendMeasurement(self, temperature, hasWater, lightIntensity):
+		measurementData = {
+                    'temperature': "%.1f" % temperature, 
+                    'hasWater': repr(hasWater).lower(), 
+                    'lightIntensity': "%.1f" % lightIntensity, 
+                    '_csrf': self.csrf
+                }
+                print "%.1f" % lightIntensity
+                createMeasurementRequest = requests.put(self.coreURL + 'measurement', data=measurementData, cookies=self.request.cookies)
 		print(measurementData)
 		print(createMeasurementRequest.url)
 		print(createMeasurementRequest.status_code)

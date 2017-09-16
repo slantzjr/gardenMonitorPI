@@ -6,6 +6,7 @@ import RPi.GPIO as GPIO
 from gardenMonitorEmail import gardenEmail
 from gardenMonitorHTTP import gardenMonitorSession
 from gardenThermometer import thermometer
+from lightIntensity import lightMeasurement 
 import time
 
 session = gardenMonitorSession.gardenMonitorSession()
@@ -20,8 +21,8 @@ prevWater = True
 while True:
   temp = thermometer.read()
   hasWater = GPIO.input(26) == 0
-  
-  session.sendMeasurement(temp, hasWater)
+  lightIntensity = lightMeasurement.readLight()  
+  session.sendMeasurement(temp, hasWater, lightIntensity)
   
   if hasWater != prevWater:
     gardenEmail.send_alert(hasWater)
