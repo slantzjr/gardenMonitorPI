@@ -22,7 +22,9 @@ while True:
   temp = thermometer.read()
   hasWater = GPIO.input(26) == 0
   lightIntensity = lightMeasurement.readLight()  
+  session.login()
   session.sendMeasurement(temp, hasWater, lightIntensity)
+  session.logout()
   
   if hasWater != prevWater:
     gardenEmail.send_alert(hasWater)
