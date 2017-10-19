@@ -3,7 +3,7 @@ import time
  
 # Define some constants from the datasheet
 
-DEVICE     = 0x23 # Default device I2C address
+DEVICE                   = 0x23 # Default device I2C address
 ONE_TIME_HIGH_RES_MODE_2 = 0x21
 
 # Start measurement at 1lx resolution. Time typically 120ms
